@@ -1,0 +1,14 @@
+.element__title {
+  max-width: 200px;
+  margin: 25px auto 31px 21px;
+  font-family:'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: calc(29/24);
+  color: #000000;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+}

@@ -1,0 +1,16 @@
+.profile__addButtonBox {
+  margin: 35px 0 auto auto;
+  width: 150px;
+  height: 50px;
+  border: 2px solid #FFFFFF;
+  box-sizing: border-box;
+  border-radius: 2px;
+  display: flex;
+  margin-bottom: 85px;
+}
+
+@media screen and (max-width: 760px) {
+  .profile__addButtonBox{
+    width: 282px;
+  margin: 34px auto 36px;
+ }

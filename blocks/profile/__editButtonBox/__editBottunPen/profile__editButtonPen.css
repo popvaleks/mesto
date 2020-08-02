@@ -1,0 +1,12 @@
+.profile__editButtonPen {
+  width: 10px;
+  /* height: 10px; */
+  margin: 7px;
+}
+
+@media screen and (max-width: 665px) {
+  .profile__editButtonPen {
+    width: 7.5px;
+    margin: 4.5px;
+}
+}
