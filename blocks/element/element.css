@@ -11,3 +11,9 @@
   background-color: #FFFFFF;
   border-radius: 10px;
 }
+
+@media screen and (max-width: 320px) {
+  .element {
+    max-width: 262px;
+}
+}

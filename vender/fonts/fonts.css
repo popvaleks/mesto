@@ -17,7 +17,7 @@
 @font-face {
   font-family: 'Inter';
   font-style: normal;
-  font-weight: bold;
-  src: url(./Inter-Bold/Inter-Bold.woff) format('woff'),
-       url(./Inter-Bold/Inter-Bold.woff2) format('woff2');
+  font-weight: 500;
+  src: url(./Inter-Medium/Inter-Medium.woff) format('woff'),
+       url(./Inter-Medium/Inter-Medium.woff2) format('woff2');
 }

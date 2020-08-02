@@ -11,7 +11,7 @@
 
       <!-- Header -->
     <header class="header">
-      <object type="image/svg+xml" class="header__logo" data="/images/Mesto.svg" alt="Логотип Место">
+      <object type="image/svg+xml" class="header__logo" data="./images/Mesto.svg">
         Ваш браузер устарел и не поддерживает формат SVG
       </object>
       <div class="header__line">
@@ -21,60 +21,52 @@
 
       <!-- Profile -->
       <section class="profile">
-        <img src="/images/image.jpg" alt="Жак Кусто" class="profile__avatar"></img>
+        <img src="./images/image.jpg" alt="Жак-Ив Кусто" class="profile__avatar">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="button profile__editbutton" name="button-edit" type="button">
-            <!-- <div class="profile__editButtonBox"> -->
-              <!-- <object type="image/svg+xml" class="profile__editButtonPen" data="/images/edit.svg" alt="Карандаш"> -->
-                <!-- Ваш браузер устарел и не поддерживает формат SVG -->
-              <!-- </object> -->
-            <!-- </div> -->
+          <button class="button profile__editbutton" name="button-edit" aria-label="Открыть попап" type="button">
           </button>
           <h2 class="profile__job">Исследователь океана</h2>
         </div>
         <button class="button profile__addButtonBox" name="button-add" type="button">
-          <!-- <object type="image/svg+xml" class="profile__editButtonCross" data="/images/cross.svg" alt="Перекрестье"> -->
-            <!-- Ваш браузер устарел и не поддерживает формат SVG -->
-          <!-- </object> -->
         </button>
       </section>
 
       <!-- Elements -->
       <section class="elements">
         <div class="element">
-          <img class="element__photo" src="/images/karachaevsk.png" alt="Карачаевск">
+          <img class="element__photo" src="./images/karachaevsk.png" alt="Карачаевск">
           <h3 class="element__title">Карачаевск</h3>
           <button class="button element__buttonLike"></button>
         </div>
 
         <div class="element">
-          <img class="element__photo" src="/images/elbrus.png" alt="Эльбрус">
+          <img class="element__photo" src="./images/elbrus.png" alt="Эльбрус">
           <h3 class="element__title">Эльбрус</h3>
           <button class="button element__buttonLike"></button>
         </div>
 
         <div class="element">
-          <img class="element__photo" src="/images/dombai.png" alt="Домбай">
+          <img class="element__photo" src="./images/dombai.png" alt="Домбай">
           <h3 class="element__title">Домбай</h3>
           <button class="button element__buttonLike"></button>
         </div>
 
         <div class="element">
-          <img class="element__photo" src="/images/elbrus.png" alt="Эльбрус">
+          <img class="element__photo" src="./images/elbrus.png" alt="Эльбрус">
           <h3 class="element__title">Эльбрус</h3>
           <button class="button element__buttonLike"></button>
         </div>
 
         <div class="element">
-          <img class="element__photo" src="/images/dombai.png" alt="Домбай">
+          <img class="element__photo" src="./images/dombai.png" alt="Домбай">
           <h3 class="element__title">Домбай</h3>
           <button class="button element__buttonLike"></button>
         </div>
 
         <div class="element">
-          <img class="element__photo" src="/images/karachaevsk.png" alt="Карачаевск">
-          <h3 class="element__title">Карачаево-Черкесияяяяяяяяяяяяяя</h3>
+          <img class="element__photo" src="./images/karachaevsk.png" alt="Карачаевск">
+          <h3 class="element__title">Карачаево-Черкесия</h3>
           <button class="button element__buttonLike"></button>
         </div>
       </section>
@@ -82,15 +74,16 @@
       <footer class="footer">
         <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div class="popup ">
       <div class="popup__container">
          <h3 class="popup__title">Редактировать профиль</h3>
-        <input type="text" placeholder="Имя" class="popup__name" maxlength="45">
-        <input type="text" placeholder="Род занятий" class="popup__job" maxlength="45">
-        <button class="button popup__buttonSave">Сохранить</button>
+        <input type="text" value="Имя" class="popup__name" maxlength="45">
+        <input type="text" value="Род занятий" class="popup__job" maxlength="45">
+        <button class="button popup__buttonSave" aria-label="Сохранить и закрыть попап">Сохранить</button>
       </div>
-      <button class="button popup__buttonCross" aria-label="Закрыть попап" type="button" name="button-cancel"></button>
+      <button class="button popup__buttonCross" aria-label="Закрыть попап"></button>
     </div>
   </div>
+  <script src="./scripts/main.js"></script>
 </body>
 </html>

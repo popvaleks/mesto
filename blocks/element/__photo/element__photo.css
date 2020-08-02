@@ -7,3 +7,10 @@
   object-fit: cover;
   object-position: center;
 }
+
+@media screen and (max-width: 320px) {
+  .element__photo {
+    max-width: 262px;
+}
+}
+

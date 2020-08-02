@@ -19,7 +19,14 @@
 }
 
 @media screen and (max-width: 760px) {
-  .profile__addButtonBox{
+  .profile__addButtonBox {
     width: 282px;
   margin: 34px auto 36px;
  }
+}
+
+ @media screen and (max-width: 320px) {
+  .profile__addButtonBox {
+    width: 242px;
+}
+}
