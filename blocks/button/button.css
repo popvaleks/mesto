@@ -1,0 +1,15 @@
+.button {
+  padding: 0;
+  cursor: pointer;
+  transition: opacity .5s linear;
+}
+
+.button:hover {
+  opacity: .6;
+}
+
+.button,
+.button:active,
+.button:focus {
+    outline: none;
+}

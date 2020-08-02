@@ -1,0 +1,24 @@
+.popup__buttonCross {
+  width: 40.7px;
+  height: 40.7px;
+  position: relative;
+  top: -182.5px;
+  right: 0px;
+  background: none;
+  border: none;
+  background-image: url(../../../images/Close-cross.svg);
+  background-repeat: no-repeat;
+  align-self: center;
+  background-position: center;
+  box-sizing: border-box;
+
+}
+
+@media screen and (max-width: 630px) {
+  .popup__buttonCross {
+    top: -140.5px;
+    right: 0px;
+    width: 30px;
+    height: 30px;
+
+ }
