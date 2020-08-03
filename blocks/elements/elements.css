@@ -7,7 +7,6 @@
   grid-template-columns: repeat(3, 1fr);
   column-gap: 18px;
   row-gap: 21px;
-  box-sizing: border-box;
   justify-content: space-between;
   align-content: space-between;
 
@@ -23,14 +22,11 @@
 @media screen and (max-width: 630px) {
   .elements {
     grid-template-columns: repeat(1, 1fr);
-    max-width: 600px;
-    column-gap: 36px;
 }
 }
 @media screen and (max-width: 320px) {
   .elements {
     grid-template-columns: repeat(1, 1fr);
     max-width: 300px;
-    column-gap: 36px;
 }
 }

@@ -4,26 +4,15 @@
   flex-direction: column;
   margin: 0 auto;
   box-sizing: border-box;
+  width: 99.6%;
+  border-bottom: 2px solid rgba(84, 84, 84, .7);
+  margin: 0 auto;
+  margin-bottom: 36.25px;
 }
 
 @media screen and (max-width: 915px) {
-  .header{
-    max-width: 596px;
-
- }
-
-
-@media screen and (max-width: 665px) {
-  .header{
+  .header {
     width: 100%;
-    max-width: 480px;
- }
-
-
-
-
-
-
-
-
-
+    max-width: 596px;
+  }
+}

@@ -6,20 +6,21 @@
 }
 
 @media screen and (max-width: 915px) {
-  .profile{
+  .profile {
     max-width: 85%;
   }
 }
 
 @media screen and (max-width: 760px) {
   .profile {
-  flex-direction: column;
+    flex-direction: column;
   }
 }
 
 @media screen and (max-width: 390px) {
-  .profile{
-  max-width: 100%;
+  .profile {
+    max-width: 100%;
+  }
 
- }
+}
 

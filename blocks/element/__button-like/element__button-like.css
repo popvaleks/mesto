@@ -1,10 +1,9 @@
-.element__buttonLike {
+.element__button-like {
   width: 24px;
   height: 24px;
   background: none;
-  background-image: url(../../../images/like.svg);
+  background-image: url("../../../images/like.svg");
   background-repeat: no-repeat;
-  align-self: center;
   background-position: center;
   border: none;
   box-sizing: border-box;
