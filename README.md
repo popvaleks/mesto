@@ -18,4 +18,4 @@ ____
   - JS
 
 ____
-## Быстро ознакомиться с ним можно [тут](https://popvaleks.github.io/mesto/index.html).
+## Быстро ознакомиться с проектом можно [тут](https://popvaleks.github.io/mesto/index.html).
