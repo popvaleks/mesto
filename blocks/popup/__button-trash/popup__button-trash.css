@@ -1,0 +1,11 @@
+.popup__button-trash {
+  background: url(../../../images/Trash.svg) transparent no-repeat;
+  width: 18px;
+  height: 19.3px;
+  border: none;
+  top: 18px;
+  right: 15px;
+  align-self: center;
+  position: absolute;
+  box-sizing: border-box;
+}

@@ -11,5 +11,6 @@
   box-sizing: border-box;
   visibility: hidden;
   /* display: none; */
-
+  transition: .4s ease-out;
+  opacity: 0;
 }

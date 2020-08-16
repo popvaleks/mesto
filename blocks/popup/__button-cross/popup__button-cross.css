@@ -1,9 +1,8 @@
 .popup__button-cross {
   width: 40.7px;
   height: 40.7px;
-  position: relative;
-  top: -184.5px;
-  right: 0px;
+  top: -40px;
+  right: -40px;
   background: none;
   border: none;
   background-image: url("../../../images/Close-cross.svg");
@@ -11,15 +10,15 @@
   align-self: center;
   background-position: center;
   box-sizing: border-box;
-
+  position: absolute;
+  z-index: 100;
 }
 
 @media screen and (max-width: 630px) {
   .popup__button-cross {
-    top: -100px;
-    right: 31.5px;
-    width: 20px;
-    height: 20px;
-    background-image: url("../../../images/Close-cross_black.svg");
+    top: calc(10px - 40px);
+    right: calc(10px - 40px);
+    width: 30px;
+    height: 30px;
   }
 }

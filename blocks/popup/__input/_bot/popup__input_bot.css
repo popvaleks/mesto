@@ -1,0 +1,11 @@
+.popup__input_bot {
+  margin-bottom: 48px;
+}
+
+@media screen and (max-width: 630px) {
+  .popup__input_bot {
+    margin-bottom: 36px;
+    margin-left: 20px;
+    margin-right: auto;
+ }
+}

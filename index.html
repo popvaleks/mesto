@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
   <link rel="stylesheet" href="./pages/index.css">
 </head>
-<body>
+
+<body class="background">
   <div class="page">
 
-      <!-- Header -->
+    <!-- Header -->
     <header class="header">
       <img class="header__logo" src="./images/Mesto.svg" alt="Логотип место">
     </header>
@@ -30,56 +32,52 @@
 
       <!-- Elements -->
       <section class="elements">
-        <article class="element">
-          <img class="element__photo" src="./images/karachaevsk.png" alt="Карачаевск">
-          <h3 class="element__title">Карачаевск</h3>
-          <button class="button element__button-like" aria-label="Лайк"></button>
-        </article>
 
-        <article class="element">
-          <img class="element__photo" src="./images/elbrus.png" alt="Эльбрус">
-          <h3 class="element__title">Эльбрус</h3>
-          <button class="button element__button-like" aria-label="Лайк"></button>
-        </article>
-
-        <article class="element">
-          <img class="element__photo" src="./images/dombai.png" alt="Домбай">
-          <h3 class="element__title">Домбай</h3>
-          <button class="button element__button-like" aria-label="Лайк"></button>
-        </article>
-
-        <article class="element">
-          <img class="element__photo" src="./images/elbrus.png" alt="Эльбрус">
-          <h3 class="element__title">Эльбрус</h3>
-          <button class="button element__button-like" aria-label="Лайк"></button>
-        </article>
-
-        <article class="element">
-          <img class="element__photo" src="./images/dombai.png" alt="Домбай">
-          <h3 class="element__title">Домбай</h3>
-          <button class="button element__button-like" aria-label="Лайк"></button>
-        </article>
-
-        <article class="element">
-          <img class="element__photo" src="./images/karachaevsk.png" alt="Карачаевск">
-          <h3 class="element__title">Карачаево-Черкесия</h3>
-          <button class="button element__button-like" aria-label="Лайк"></button>
-        </article>
       </section>
-      </main>
-      <footer class="footer">
-        <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <div class="popup ">
+    <!-- Попап профиля -->
+    <div class="popup popup_profile">
       <form class="popup__container">
-         <h3 class="popup__title">Редактировать профиль</h3>
+        <h3 class="popup__title">Редактировать профиль</h3>
         <input type="text" name="Name" value="Имя" class="popup__input popup__input_name" maxlength="45">
-        <input type="text" name="Job" value="Род занятий" class="popup__input popup__input_job" maxlength="45">
+        <input type="text" name="Job" value="Род занятий" class="popup__input popup__input_bot" maxlength="45">
         <button class="button popup__button-save" aria-label="Сохранить и закрыть попап">Сохранить</button>
+        <button class="button popup__button-cross" aria-label="Закрыть попап" type="button"></button>
       </form>
-      <button class="button popup__button-cross" aria-label="Закрыть попап" type="button"></button>
     </div>
+    <!-- Попап добавления карточек -->
+    <div class="popup popup_cards">
+      <form class="popup__container">
+        <h3 class="popup__title">Новое место</h3>
+        <input type="text" name="title" value="" placeholder="Название" class="popup__input popup__input_name"
+          maxlength="45">
+        <input type="text" name="link" value="" placeholder="Ссылка на картинку" class="popup__input popup__input_bot">
+        <button class="button popup__button-save" aria-label="Сохранить и закрыть попап">Создать</button>
+        <button class="button popup__button-cross" aria-label="Закрыть попап" type="button"></button>
+      </form>
+    </div>
+    <!-- Попап открытой карточки-->
+    <div class="popup popup_window">
+      <div class="popup__wrapper">
+        <img class="popup__image" src="" alt="">
+        <p class="popup__subtitle"></p>
+        <button class="button popup__button-cross popup__button-cross_window button popup__button-wCross" aria-label="Закрыть попап" type="button"></button>
+      </div>
+    </div>
+    <!-- Карточки -->
+    <template id="card-template">
+      <article class="element">
+        <img class="element__photo" src=" " alt=" ">
+        <h3 class="element__title"></h3>
+        <button class="button element__button-like" aria-label="Лайк" type="button"></button>
+        <button class="button popup__button-trash" aria-label="Удалить карточку" type="button"></button>
+      </article>
+    </template>
   </div>
   <script src="./scripts/index.js"></script>
 </body>
+
 </html>
