@@ -1,5 +1,4 @@
 .footer {
-  box-sizing: border-box;
   max-width: 882px;
   width: calc(882/1280);
   margin: 66px auto 0;
