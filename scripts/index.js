@@ -22,34 +22,29 @@ const body = document.body;
 //Открытие/закрытие любого попапа
 function togglePopup(elem) {
   elem.classList.toggle('popup_opened');
-  // Добавить или убрать слушателей
-  if (elem.classList.contains('popup_opened')) {
-    addListenerEscClick();
-  }
-  else {
-    clearPopupListenersByEscClick()
-  };
+}
 
+function togglePopupClearListenersByEscClick(elem) {
+  togglePopup(elem);
+  event.stopPropagation(elem.classList.contains('popup_opened'));
+  if ((elem.classList.contains('popup_opened')) === false) {
+    clearPopupListenersByEscClick();
+  }
 }
 
 // Закрытие попапов по Esc
 function closeByEsc(evt) {
   const key = evt.keyCode;
   const escCode = 27; // код кнопки Esc
-  // console.log(this);
   if (key === escCode) {
-    // document.querySelector('.popup_opened').classList.remove('popup_opened');
-    togglePopup(document.querySelector('.popup_opened')); // убирет ближайщий селектор с классом, а не активный, если будут еще октрытые попапы, закроются они
-    // clearPopupListenersByEscClick();
+    togglePopupClearListenersByEscClick(document.querySelector('.popup_opened'));
   };
 }
 
 // Закрытие по клику вне окна
 function closePopupByOverlayClick(event) {
   if (event.target == event.currentTarget) {
-    // document.querySelector('.popup_opened').classList.remove('popup_opened');
-    // clearPopupListenersByEscClick();
-    togglePopup(document.querySelector('.popup_opened'));
+    togglePopupClearListenersByEscClick(document.querySelector('.popup_opened'));
   };
 }
 
@@ -57,15 +52,18 @@ function closePopupByOverlayClick(event) {
 function openEditPopup() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  togglePopup(popupProfile);
+  togglePopupClearListenersByEscClick(popupProfile);
+  if (popupProfile.classList.contains('popup_opened')) {
+    addListenerEscClick();
+  }
 }
 
-// Редактирование профиля
+// Применить редактирования профиля
 function submitEditProfileFormHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  togglePopup(popupProfile);
+  togglePopupClearListenersByEscClick(popupProfile);
 }
 
 // Создать реализацию лайка
@@ -88,7 +86,10 @@ function openCard(evt) {
   subtitleCard.textContent = evt.target.alt;
   srcCard.src = evt.target.src;
   srcCard.alt = evt.target.alt;
-  togglePopup(popupWindow);
+  togglePopupClearListenersByEscClick(popupWindow);
+  if (popupWindow.classList.contains('popup_opened')) {
+    addListenerEscClick();
+  }
 }
 
 // Собираем карточку
@@ -124,29 +125,38 @@ function submitAddCardForm(evt) {
   elements.prepend(createCard(srcInputCards.value, nameInputCards.value));
   nameInputCards.value = '';
   srcInputCards.value = '';
-  togglePopup(popupCards);
+  togglePopupClearListenersByEscClick(popupCards);
+  if (popupCards.classList.contains('popup_opened')) {
+    addListenerEscClick();
+  }
+}
+
+// Добавить новую карточку (+)
+function openAddCardsPopup() {
+  togglePopupClearListenersByEscClick(popupCards);
+  if (popupCards.classList.contains('popup_opened')) {
+    addListenerEscClick();
+  }
 }
 
 // Добваить слушатели закрытия по эск и клику
 function addListenerEscClick() {
   document.querySelector('.popup_opened').addEventListener('click', closePopupByOverlayClick, false); //Закрытие по клику вне
   body.addEventListener('keyup', closeByEsc, false); // Закрытие по Esc
-  console.log("добавили");
 }
 
 // Удалить слушатели клика и эск
 function clearPopupListenersByEscClick() {
   body.removeEventListener('keyup', closeByEsc, false);
   body.removeEventListener('click', closePopupByOverlayClick);
-  console.log("убрали");
 }
 
 popupOpenButton.addEventListener('click', () => openEditPopup(popupProfile)); //кнопка ред профиль
 formElement.addEventListener('submit', submitEditProfileFormHandler); //кнопка сохранить профиль
 popupResetButton.addEventListener('click', () => openEditPopup(popupProfile)); //кнопка закрыть профиль
-buttonCards.addEventListener('click', () => togglePopup(popupCards)); //кнопка "+" (открыть попап добавления карточек)
+buttonCards.addEventListener('click', () => openAddCardsPopup(popupCards)); //кнопка "+" (открыть попап добавления карточек)
 formElementCards.addEventListener('submit', submitAddCardForm); //кнопка добавить новую карточку
-popupResetButtonCards.addEventListener('click', () => togglePopup(popupCards)); //кнопка закрыть попап добавления карточек
-closeWindow.addEventListener('click', () => togglePopup(popupWindow)); //кнопка закрыть карточку
+popupResetButtonCards.addEventListener('click', () => togglePopupClearListenersByEscClick(popupCards)); //кнопка закрыть попап добавления карточек
+closeWindow.addEventListener('click', () => togglePopupClearListenersByEscClick(popupWindow)); //кнопка закрыть карточку
 
 addCards(initialCards);
