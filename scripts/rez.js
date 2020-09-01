@@ -17,30 +17,13 @@ const subtitleCard = document.querySelector('.popup__subtitle');
 const srcCard = document.querySelector('.popup__image');
 const popupImg = document.querySelector('.popup_window');
 const closeWindow = popupImg.querySelector('.popup__button-cross');
+const formAdd = document.forms.add;
+const formEdit = document.forms.edit;
 const body = document.body;
 
-const formAdd = document.forms.add;
-const formProfile = document.forms.edit;
-const buttonSave = document.querySelector('.popup__button-save');
-
-//сбрасывание ошибок валидации
-function cleanError(form) {
-  form.querySelectorAll('.popup__input-error').forEach((span) => {
-    // удалить со спана модификатор ошибки
-    span.classList.remove('popup__error_visible');
-    // удалить текст спана
-    span.textContent = '';
-  })
-  form.querySelectorAll('.popup__input').forEach((input) => {
-    //удаляем с инпута модификтор ошибки
-    input.classList.remove('popup__input_type_error');
-  });
-};
-
 //Открытие/закрытие любого попапа
-function togglePopup(elem) {
-  elem.classList.toggle('popup_opened');
-  // cleanError(elem);
+const togglePopup = (popup) => {
+  popup.classList.toggle('popup_opened');
 }
 
 // Функкция закрытия по Esc
@@ -48,64 +31,35 @@ function closeByEsc(evt) {
   const key = evt.keyCode;
   const escCode = 27; // код кнопки Esc
   if (key === escCode) {
-    clearPopupListenersClick(document.querySelector('.popup_opened')); // удалить слушатель клика вне окна
-    clearPopupListenersEsc(document.querySelector('.popup_opened')); // удалить слушатель Esc
-    togglePopup(document.querySelector('.popup_opened'));
+    const popupIsOpened = document.querySelector('.popup_opened')
+    togglePopup(popupIsOpened);
+    document.removeEventListener('keyup', closeByEsc, false); // Закрытие по Esc
+    console.log('+esc')
   };
 }
 
 // Функция закрытия по клику вне окна
-function closePopupByOverlayClick(event) {
-  if (event.target === event.currentTarget) {
-    clearPopupListenersClick(document.querySelector('.popup_opened')); // удалить слушатель клика вне окна
-    clearPopupListenersEsc(document.querySelector('.popup_opened')); // удалить слушатель Esc
-    togglePopup(document.querySelector('.popup_opened'));
+function closePopupByOverlayClick(evt) {
+  if (evt.target === evt.currentTarget) {
+    const popupIsOpened = document.querySelector('.popup_opened')
+    togglePopup(popupIsOpened);
+    console.log('+click')
   };
 }
 
-// Добавление слушателя функуции закрытия по Esc
-function addListenerEsc() {
-  body.addEventListener('keyup', closeByEsc, false); // Закрытие по Esc
-}
-
-// Удалить слушатели эск
-function clearPopupListenersEsc() {
-  body.removeEventListener('keyup', closeByEsc, false);
-}
-
-// Добавить слушатель клика
-function addListenerClick(elem) {
-  elem.addEventListener('click', closePopupByOverlayClick, false); //Закрытие по клику вне
-}
-
-// Удалить слушатель клика
-function clearPopupListenersClick(elem) {
-  elem.removeEventListener('click', closePopupByOverlayClick, false); //Закрытие по клику вне
-}
-
-// возвращает кнопке профиля активное состояние
-function resetDisabledButton() {
-  if (buttonSave.classList.contains('popup__button-save_disabled')) {
-    buttonSave.classList.remove('popup__button-save_disabled');
-  }
-}
-
-// Внесение имени и работы в форму при открытии
-function openEditProfile() {
+// Открыть попап профиля
+const openEditProfile = () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   togglePopup(popupProfile);
-  addListenerEsc(); // добавить слушатель Esc
-  addListenerClick(popupProfile); // добавить слушатель клик вне окна
-  cleanError(formProfile);
-  resetDisabledButton()
+  document.addEventListener('keyup', closeByEsc, false); // Закрытие по Esc
+  document.querySelector('.popup_opened').addEventListener('click', closePopupByOverlayClick, false); //Закрытие по клику вне
 }
 
 // Закрыть попап профиля
-function closeEditProfile() {
-  clearPopupListenersClick(popupProfile); // удалить слушатель клика вне окна
-  clearPopupListenersEsc();
+const closeEditProfile = () => {
   togglePopup(popupProfile);
+  document.removeEventListener('keyup', closeByEsc, false);
 }
 
 // Применить редактирования профиля
@@ -113,7 +67,7 @@ function submitEditProfileForm(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  clearPopupListenersClick(popupProfile); // удалить слушатель клика вне окна
+  clearPopupListenersClick(); // удалить слушатель клика вне окна
   clearPopupListenersEsc();
   togglePopup(popupProfile);
 }
@@ -139,13 +93,7 @@ function openCard(evt) {
   srcCard.alt = evt.target.alt;
   togglePopup(popupImg);
   addListenerEsc();
-  addListenerClick(popupImg); // добавить слушатель клик вне окна
-}
-
-function closeCard() {
-  clearPopupListenersClick(popupImg); // удалить слушатель клика вне окна
-  clearPopupListenersEsc(); // удалить слушателя Esc
-  togglePopup(popupImg);
+  addListenerClick(); // добавить слушатель клик вне окна
 }
 
 // Собираем карточку
@@ -179,7 +127,7 @@ function submitAddCardForm(evt) {
   evt.preventDefault();
   elements.prepend(createCard(srcInputCards.value, nameInputCards.value));//
   formAdd.reset();
-  clearPopupListenersClick(popupCards); // удалить слушатель клика вне окна
+  clearPopupListenersClick(); // удалить слушатель клика вне окна
   clearPopupListenersEsc();
   togglePopup(popupCards);
 }
@@ -187,29 +135,49 @@ function submitAddCardForm(evt) {
 // Открыть попап добавления карточки
 function openAddCard() {
   togglePopup(popupCards);
-  addListenerEsc(); // добавить слушатель Esc
-  addListenerClick(popupCards); // добавить слушатель клик вне окна
-  cleanError(formAdd);
-  formAdd.reset();
 }
 
 // Закрыть попап добавления карточки
 function closeAddCard() {
   formAdd.reset();
-  clearPopupListenersEsc(); // удалить слушателя Esc
-  clearPopupListenersClick(popupCards); // удалить слушатель клика вне окна
   togglePopup(popupCards);
 }
 
+
+
+
+
+
+
+
+
+// // Удалить слушатели клика
+// function clearPopupListenersClick(popup) {
+//   popup.removeEventListener('click', closePopupByOverlayClick, false); //Закрытие по клику вне
+// }
+
+
 // Слушатели профиля
-popupOpenButton.addEventListener('click', openEditProfile); //кнопка ред профиль
+popupOpenButton.addEventListener('click', openEditProfile);
 formElement.addEventListener('submit', submitEditProfileForm); //кнопка сохранить профиль
-popupResetButton.addEventListener('click', closeEditProfile); //кнопка закрыть профиль
+popupResetButton.addEventListener('click', closeEditProfile);
 // Слушатели +
-buttonCards.addEventListener('click', openAddCard); //кнопка "+" (открыть попап добавления карточек)
+buttonCards.addEventListener('click', () => { //кнопка "+" (открыть попап добавления карточек)
+  openAddCard();
+  addListenerEsc(); // добавить слушатель Esc
+  addListenerClick(); // добавить слушатель клик вне окна
+});
 formElementCards.addEventListener('submit', submitAddCardForm); //кнопка добавить новую карточку
-popupResetButtonCards.addEventListener('click', closeAddCard); //кнопка закрыть попап добавления карточек
+popupResetButtonCards.addEventListener('click', () => {
+  clearPopupListenersEsc(); // удалить слушателя Esc
+  clearPopupListenersClick(); // удалить слушатель клика вне окна
+  closeAddCard(); //кнопка закрыть попап добавления карточек
+});
 // Слушатели карточки
-closeWindow.addEventListener('click', closeCard); // закрыть карточку по кресту
+closeWindow.addEventListener('click', () => {  //кнопка закрыть карточку
+  clearPopupListenersClick(); // удалить слушатель клика вне окна
+  clearPopupListenersEsc(); // удалить слушателя Esc
+  togglePopup(popupImg);
+});
 
 addCards(initialCards);

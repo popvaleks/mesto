@@ -42,3 +42,31 @@
 @import url("../blocks/popup/__image/popup__image.css");
 @import url("../blocks/popup/__subtitle/popup__subtitle.css");
 @import url("../blocks/popup/__button-cross/_window/popup__button-cross_window.css");
+@import url("../blocks/popup/__input/_type_error/popup__input_type_error.css");
+@import url("../blocks/popup/__button-save/popup__button-save.css");
+@import url("../blocks/popup/__button-save/_disabled/popup__button-save_disabled.css");
+.popup__error_visible {
+  margin: 0 0 0 36px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: red;
+  display: inline;
+  position: absolute;
+  top: 152px;
+  left: 0;
+}
+
+.popup__error_visible:last-of-type {
+  top: 215px;
+}
+
+
+@media screen and (max-width: 500px) {
+  .popup__error_visible {
+      margin: 0 0 2px 20px;
+      max-width: 64vw;
+      top: -3px;
+  }
+}
