@@ -21,7 +21,8 @@ const body = document.body;
 
 const formAdd = document.forms.add;
 const formProfile = document.forms.edit;
-const buttonSave = document.querySelector('.popup__button-save');
+const buttonSaveEdit = formProfile.querySelector('.popup__button-save');
+const buttonSaveAdd = formAdd.querySelector('.popup__button-save');
 
 //сбрасывание ошибок валидации
 function cleanError(form) {
@@ -85,9 +86,13 @@ function clearPopupListenersClick(elem) {
 
 // возвращает кнопке профиля активное состояние
 function resetDisabledButton() {
-  if (buttonSave.classList.contains('popup__button-save_disabled')) {
-    buttonSave.classList.remove('popup__button-save_disabled');
+  if (buttonSaveEdit.classList.contains('popup__button-save_disabled')) {
+    buttonSaveEdit.classList.remove('popup__button-save_disabled');
   }
+}
+
+function autoFocus(elem) {
+  document.getElementById(elem).focus();
 }
 
 // Внесение имени и работы в форму при открытии
@@ -98,7 +103,7 @@ function openEditProfile() {
   addListenerEsc(); // добавить слушатель Esc
   addListenerClick(popupProfile); // добавить слушатель клик вне окна
   cleanError(formProfile);
-  resetDisabledButton()
+  resetDisabledButton();
 }
 
 // Закрыть попап профиля
@@ -106,6 +111,14 @@ function closeEditProfile() {
   clearPopupListenersClick(popupProfile); // удалить слушатель клика вне окна
   clearPopupListenersEsc();
   togglePopup(popupProfile);
+}
+
+
+// возвращает кнопке профиля не активное состояние
+function addDisabledButton() {
+  if (!buttonSaveAdd.classList.contains('popup__button-save_disabled')) {
+    buttonSaveAdd.classList.add('popup__button-save_disabled');
+  }
 }
 
 // Применить редактирования профиля
@@ -191,6 +204,7 @@ function openAddCard() {
   addListenerClick(popupCards); // добавить слушатель клик вне окна
   cleanError(formAdd);
   formAdd.reset();
+  addDisabledButton()
 }
 
 // Закрыть попап добавления карточки

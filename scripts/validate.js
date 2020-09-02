@@ -1,5 +1,5 @@
 // добавление класса с ошибкой
-const showInputError = ({inputErrorClass, errorClass}, formElement, inputElement, errorMessage) => {
+const showInputError = ({ inputErrorClass, errorClass }, formElement, inputElement, errorMessage) => {
   // найти элемент у которого ошибка
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   // добавить стиль для элемента с ошибкой
@@ -11,7 +11,7 @@ const showInputError = ({inputErrorClass, errorClass}, formElement, inputElement
 };
 
 // скрытие ошибок валидации (удаление сподписи)
-const hideInputError = ({inputErrorClass, errorClass}, formElement, inputElement) => {
+const hideInputError = ({ inputErrorClass, errorClass }, formElement, inputElement) => {
   // поиск элемента с ошибкой
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   // удалить стиль ошибки (красная рамка и т.д.)
@@ -23,13 +23,13 @@ const hideInputError = ({inputErrorClass, errorClass}, formElement, inputElement
 };
 
 // валидация input
-const checkInputValidity = ({inputErrorClass, errorClass}, formElement, inputElement) => {
+const checkInputValidity = ({ inputErrorClass, errorClass }, formElement, inputElement) => {
   if (!inputElement.validity.valid) {
     // если не валидно ошибку показать
-    showInputError({inputErrorClass, errorClass}, formElement, inputElement, inputElement.validationMessage);
+    showInputError({ inputErrorClass, errorClass }, formElement, inputElement, inputElement.validationMessage);
   } else {
     // если валидно скрыть ошибку
-    hideInputError({inputErrorClass, errorClass}, formElement, inputElement);
+    hideInputError({ inputErrorClass, errorClass }, formElement, inputElement);
   };
 };
 
@@ -41,7 +41,7 @@ const hasInvalidInput = (inputList) => {
 };
 
 //блокировка кнопки (так же добавить ей прозрачность)
-const toggleButtonState = ({inactiveButtonClass}, inputList, buttonElement) => {
+const toggleButtonState = ({ inactiveButtonClass }, inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(inactiveButtonClass);
     buttonElement.disabled = true;
@@ -52,7 +52,7 @@ const toggleButtonState = ({inactiveButtonClass}, inputList, buttonElement) => {
 };
 
 // добавить формам слушателей
-const setEventListeners = ({submitButtonSelector, inputSelector, ...rest}, formElement) => {
+const setEventListeners = ({ submitButtonSelector, inputSelector, ...rest }, formElement) => {
   // получим массив из всех input в inputList
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   // кнопка ввода
@@ -71,7 +71,7 @@ const setEventListeners = ({submitButtonSelector, inputSelector, ...rest}, formE
 };
 
 // валидация
-const enableValidation = ({formSelector, ...rest}) => {
+const enableValidation = ({ formSelector, ...rest }) => {
   // создать массив из всех форм
   const formList = Array.from(document.querySelectorAll(formSelector));
   // добавить каждой форме слушатель
@@ -83,7 +83,7 @@ const enableValidation = ({formSelector, ...rest}) => {
   });
 };
 
-enableValidation ({
+enableValidation({
   formSelector: '.popup__container',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button-save',

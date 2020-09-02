@@ -38,22 +38,26 @@
     <div class="popup popup_profile">
       <form class="popup__container form_profile" id="form_profile" name="edit" novalidate>
         <h3 class="popup__title">Редактировать профиль</h3>
-        <input type="text" name="Name" id="name-input" value="Имя" class="popup__input popup__input_name" minlength="2" maxlength="40" required autocomplete="off" placeholder="Имя">
+        <input type="text" name="Name" id="name-input" value="Имя" class="popup__input popup__input_name" minlength="2"
+          maxlength="40" required autocomplete="off" placeholder="Имя">
         <span class="popup__input-error" id="name-input-error"></span>
-        <input type="text" name="Job" id="job-input" value="Род занятий" class="popup__input popup__input_job" minlength="2" maxlength="200" required autocomplete="off" placeholder="О себе">
+        <input type="text" name="Job" id="job-input" value="Род занятий" class="popup__input popup__input_job"
+          minlength="2" maxlength="200" required autocomplete="off" placeholder="О себе">
         <span class="popup__input-error" id="job-input-error"></span>
-        <button class="button popup__button-save" id="button-save-edit" type="submit" aria-label="Сохранить и закрыть попап">Сохранить</button>
+        <button class="button popup__button-save" id="button-save-edit" type="submit"
+          aria-label="Сохранить и закрыть попап">Сохранить</button>
         <button class="button popup__button-cross" aria-label="Закрыть попап" type="button"></button>
       </form>
     </div>
     <!-- Попап добавления карточек -->
     <div class="popup popup_cards">
-      <form class="popup__container"  id="form_add" name="add">
-        <h3 class="popup__title">Новое место</h3>
+      <form class="popup__container" id="form_add" name="add" novalidate>
+        <h3 class="popup__title popup__title_cards">Новое место</h3>
         <input type="text" name="title" value="" placeholder="Название" class="popup__input popup__input_name"
-        minlength="1" maxlength="30" required id="card-name-input">
+          minlength="1" maxlength="30" required id="card-name-input" autocomplete="off">
         <span class="popup__input-error" id="card-name-input-error"></span>
-        <input type="url" name="link" value="" placeholder="Ссылка на картинку" class="popup__input popup__input_link" required id="link-input">
+        <input type="url" name="link" value="" placeholder="Ссылка на картинку" class="popup__input popup__input_link"
+          required id="link-input" autocomplete="off">
         <span class="popup__input-error" id="link-input-error"></span>
         <button class="button popup__button-save" type="submit" aria-label="Сохранить и закрыть попап">Создать</button>
         <button class="button popup__button-cross" aria-label="Закрыть попап" type="button"></button>
