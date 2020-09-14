@@ -69,14 +69,12 @@ export default class FormValidator {
     const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     // кнопка ввода
     const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
-    // неактивная кнопка по умолчанию !!!!!!!
-
+    // неактивная кнопка по умолчанию
     this._toggleButtonState(inputList, buttonElement);
-
     // пройдемся по каждому элементу массива
     inputList.forEach((inputElement) => {
       // добавить каждому элементу слушатель ввода
-      inputElement.addEventListener('input', () => {
+      inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
         // динамическая проверка
         this._toggleButtonState(inputList, buttonElement);
@@ -86,22 +84,9 @@ export default class FormValidator {
 
   // валидация
   enableValidation() {
-    this._formElement.addEventListener('submit', (evt) => {
+    this._formElement.addEventListener("submit", (evt) => {
       evt.preventDefault(); // У каждой формы отменим стандартное поведение
     });
     this._setEventListeners(); // Для каждой формы вызовем функцию setEventListeners, передав ей элемент формы
   }
-
-  //   enableValidation({
-  //     formSelector: '.popup__container',
-  //     inputSelector: '.popup__input',
-  //     submitButtonSelector: '.popup__button-save',
-  //     inactiveButtonClass: 'popup__button-save_disabled',
-  //     inputErrorClass: 'popup__input_type_error',
-  //     errorClass: 'popup__error_visible'
-  // });
-
-
-  // включение валидации вызовом enableValidation
-  // все настройки передаются при вызове
 }

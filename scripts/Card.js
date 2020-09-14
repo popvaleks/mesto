@@ -3,14 +3,13 @@ import {
   clearPopupListenersEsc,
   openModalWindow,
   closeModalWindow,
-  popupImg,
   addListenerEsc,
   addListenerClick,
-  closeWindow
 } from "./index.js";
 
+const popupImg = document.querySelector(".popup_window"); // селектор открытой карточки
+
 export default class Card {
-  static _template = document.querySelector('#card-template').content;
 
   constructor(data, cardSelector) {
     this._name = data.name;
@@ -22,7 +21,7 @@ export default class Card {
     // забираем размеку из HTML и клонируем элемент
     const cardElement = document
       .querySelector(this._cardSelector)
-      .content.querySelector('.element')
+      .content.querySelector(".element")
       .cloneNode(true);
 
     // вернём DOM-элемент карточки
@@ -49,7 +48,7 @@ export default class Card {
     openModalWindow(popupImg);
     addListenerEsc();
     addListenerClick(popupImg); // добавить слушатель клик вне окна
-    closeWindow.addEventListener("click", this._closeCard); // закрыть карточку по кресту
+    popupImg.querySelector(".popup__button-cross").addEventListener("click", this._closeCard); // закрыть карточку по кресту
   }
 
   // Удалить карточку
@@ -62,15 +61,15 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.popup__button-trash').addEventListener('click', (evt) => {
+    this._element.querySelector(".popup__button-trash").addEventListener("click", (evt) => {
       this._trashCards(evt);
     });
 
-    this._element.querySelector('.element__button-like').addEventListener('click', (evt) => {
+    this._element.querySelector(".element__button-like").addEventListener("click", (evt) => {
       this._likeCard(evt);
     });
 
-    this._element.querySelector('.element__photo').addEventListener('click', (evt) => {
+    this._element.querySelector(".element__photo").addEventListener("click", (evt) => {
       this._openCard(evt);
     });
   }
@@ -83,9 +82,9 @@ export default class Card {
     this._setEventListeners();
 
     // Добавим данные
-    this._element.querySelector('.element__photo').src = this._link;
-    this._element.querySelector('.element__title').textContent = this._name;
-    this._element.querySelector('.element__photo').alt = this._name;
+    this._element.querySelector(".element__photo").src = this._link;
+    this._element.querySelector(".element__title").textContent = this._name;
+    this._element.querySelector(".element__photo").alt = this._name;
 
     // Вернём элемент наружу
     return this._element;
