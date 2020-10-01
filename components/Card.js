@@ -1,54 +1,23 @@
-import {
-  clearPopupListenersClick,
-  clearPopupListenersEsc,
-  openModalWindow,
-  closeModalWindow,
-  addListenerEsc,
-  addListenerClick,
-} from "./index.js";
-
-const popupImg = document.querySelector(".popup_window"); // селектор открытой карточки
 
 export default class Card {
 
-  constructor(data, cardSelector) {
-    this._name = data.name;
+  constructor(data, cardSelector, handleCardClick) {
+    this._name = data.title;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
     // забираем размеку из HTML и клонируем элемент
-    const cardElement = document
-      .querySelector(this._cardSelector)
-      .content.querySelector(".element")
+    return this._cardSelector
+      .content
       .cloneNode(true);
-
-    // вернём DOM-элемент карточки
-    return cardElement;
   }
 
   // Создать реализацию лайка
   _likeCard(evt) {
     evt.target.classList.toggle("element__button-like_enabled");
-  }
-
-  // Закрыть открытую карточку
-  _closeCard() {
-    clearPopupListenersClick(popupImg); // удалить слушатель клика вне окна
-    clearPopupListenersEsc(); // удалить слушателя Esc
-    closeModalWindow(popupImg);
-  }
-
-  // Открыть карточку и получить ее значения
-  _openCard(evt) {
-    document.querySelector(".popup__subtitle").textContent = evt.target.alt;
-    document.querySelector(".popup__image").src = evt.target.src;
-    document.querySelector(".popup__image").alt = evt.target.alt;
-    openModalWindow(popupImg);
-    addListenerEsc();
-    addListenerClick(popupImg); // добавить слушатель клик вне окна
-    popupImg.querySelector(".popup__button-cross").addEventListener("click", this._closeCard); // закрыть карточку по кресту
   }
 
   // Удалить карточку
@@ -70,7 +39,7 @@ export default class Card {
     });
 
     this._element.querySelector(".element__photo").addEventListener("click", (evt) => {
-      this._openCard(evt);
+      this._handleCardClick(evt);
     });
   }
 

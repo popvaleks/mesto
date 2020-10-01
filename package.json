@@ -1,0 +1,19 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "___ # Проектная работа № 7 \"Mesto\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/popvaleks/mesto.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/popvaleks/mesto/issues"
+  },
+  "homepage": "https://github.com/popvaleks/mesto#readme"
+}

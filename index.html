@@ -38,10 +38,10 @@
     <div class="popup popup_profile">
       <form class="popup__container form_profile" id="form_profile" name="edit" novalidate>
         <h3 class="popup__title">Редактировать профиль</h3>
-        <input type="text" name="Name" id="name-input" value="Имя" class="popup__input popup__input_name" minlength="2"
+        <input type="text" name="name" id="name-input" value="Имя" class="popup__input popup__input_name" minlength="2"
           maxlength="40" required autocomplete="off" placeholder="Имя">
         <span class="popup__input-error" id="name-input-error"></span>
-        <input type="text" name="Job" id="job-input" value="Род занятий" class="popup__input popup__input_job"
+        <input type="text" name="info" id="job-input" value="Род занятий" class="popup__input popup__input_job"
           minlength="2" maxlength="200" required autocomplete="off" placeholder="О себе">
         <span class="popup__input-error" id="job-input-error"></span>
         <button class="button popup__button-save" id="button-save-edit" type="submit"
@@ -83,7 +83,7 @@
     </template>
   </div>
 
-  <script type="module" src="./scripts/index.js"></script>
+  <script type="module" src="./pages/index.js"></script>
 
 </body>
 
