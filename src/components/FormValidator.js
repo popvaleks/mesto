@@ -21,7 +21,7 @@ export default class FormValidator {
     errorElement.classList.add(this._errorClass);
   };
 
-  // скрытие ошибок валидации (удаление сподписи)
+  // скрытие ошибок валидации (удаление подписи)
   _hideInputError(inputElement, errorElement) {
     // удалить стиль ошибки (красная рамка и т.д.)
     inputElement.classList.remove(this._inputErrorClass);
