@@ -8,35 +8,17 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js"
 import UserInfo from "../components/UserInfo.js"
 
-import {
-  popupProfile,
-  popupOpenButton,
-  nameInput,
-  jobInput,
-  profileName,
-  profileJob,
-  popupCards,
-  buttonCards,
-  formAdd,
-  formProfile,
-  popupWindow,
-  cardTemplate,
-  gridCards
-} from "../utils/constants.js"
-
-//сбрасывание ошибок валидации
-function cleanError(form) {
-  form.querySelectorAll(".popup__input-error").forEach((span) => {
-    // удалить со спана модификатор ошибки
-    span.classList.remove("popup__error_visible");
-    // удалить текст спана
-    span.textContent = "";
-  });
-  form.querySelectorAll(".popup__input").forEach((input) => {
-    //удаляем с инпута модификтор ошибки
-    input.classList.remove("popup__input_type_error");
-  });
-}
+const gridCards = document.querySelector(".elements");
+const popupProfile = document.querySelector(".popup_profile");
+const popupOpenButton = document.querySelector(".profile__edit-button");
+const nameInput = popupProfile.querySelector(".popup__input_name");
+const jobInput = popupProfile.querySelector(".popup__input_job");
+const profileName = document.querySelector(".profile__name");
+const profileJob = document.querySelector(".profile__job");
+const popupCards = document.querySelector(".popup_cards");
+const buttonCards = document.querySelector(".profile__add-button-box");
+const popupWindow = document.querySelector(".popup_window");
+const cardTemplate = document.querySelector("#card-template");
 
 // открытая карточка
 const popupImg = new PopupWithImage(popupWindow);
@@ -99,7 +81,8 @@ function formValidation() {
       submitButtonSelector: '.popup__button-save',
       inactiveButtonClass: 'popup__button-save_disabled',
       inputErrorClass: 'popup__input_type_error',
-      errorClass: 'popup__error_visible'
+      errorClass: 'popup__error_visible',
+      spanClass: '.popup__input-error'
     }, form);
     // функция из класса отвечающая за добавление слушателей
     formValidator.enableValidation();
@@ -110,14 +93,12 @@ function formValidation() {
 popupOpenButton.addEventListener("click", () => {
   popupEditProfile.open();
   openEditProfile();
-  cleanError(formProfile); // сброс ошибок валидации
   formValidation(); // провести валидацию при открытии
 });
 
 //кнопка "+" (открыть попап добавления карточек)
 buttonCards.addEventListener("click", () => {
   popupAddCars.open();
-  cleanError(formAdd);
   formValidation();
 });
 

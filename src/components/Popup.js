@@ -8,11 +8,15 @@ export default class Popup {
 
   open() {
     this._popupSelector.classList.add("popup_opened");
+    // слушатель закрытия по Esc
+    document.addEventListener('keydown', (evt) => this._handleEscClose(evt));
 
   }
 
   close() {
     this._popupSelector.classList.remove("popup_opened");
+    // слушатель закрытия по Esc
+    document.removeEventListener('keydown', (evt) => this._handleEscClose(evt));
   }
 
   _handleEscClose(evt) {
@@ -31,8 +35,6 @@ export default class Popup {
     // слушатель закрытия по кресту
     this._popupSelector.querySelector(".popup__button-cross")
     .addEventListener('click', this.close.bind(this));
-    // слушатель закрытия по Esc
-    document.addEventListener('keydown', (evt) => this._handleEscClose(evt));
     // слушатель закрытия по фону
     this._popupSelector.addEventListener('click', this._handleOverlayClick.bind(this));
   }

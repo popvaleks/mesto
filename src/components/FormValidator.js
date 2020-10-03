@@ -8,6 +8,21 @@ export default class FormValidator {
     this._inputErrorClass = setting.inputErrorClass;
     this._errorClass = setting.errorClass;
     this._formElement = formElement;
+    this._spanClass = setting.spanClass;
+  }
+
+  // сбрасывание ошибок валидации
+  _cleanError() {
+    this._formElement.querySelectorAll(this._spanClass).forEach((span) => {
+      // удалить со спана модификатор ошибки
+      span.classList.remove(this._errorClass);
+      // удалить текст спана
+      span.textContent = "";
+    });
+    this._formElement.querySelectorAll(this._inputSelector).forEach((input) => {
+      //удаляем с инпута модификтор ошибки
+      input.classList.remove(this._inputErrorClass);
+    });
   }
 
   // добавление класса с ошибкой
@@ -87,6 +102,7 @@ export default class FormValidator {
     this._formElement.addEventListener("submit", (evt) => {
       evt.preventDefault(); // У каждой формы отменим стандартное поведение
     });
+    this._cleanError(); // сбрасывание ошибок валидации
     this._setEventListeners(); // Для каждой формы вызовем функцию setEventListeners, передав ей элемент формы
   }
 }

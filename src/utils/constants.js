@@ -1,14 +1,2 @@
 export const escCode = 27; // код кнопки Esc
-export const gridCards = document.querySelector(".elements");
-export const popupProfile = document.querySelector(".popup_profile");
-export const popupOpenButton = document.querySelector(".profile__edit-button");
-export const nameInput = popupProfile.querySelector(".popup__input_name");
-export const jobInput = popupProfile.querySelector(".popup__input_job");
-export const profileName = document.querySelector(".profile__name");
-export const profileJob = document.querySelector(".profile__job");
-export const popupCards = document.querySelector(".popup_cards");
-export const buttonCards = document.querySelector(".profile__add-button-box");
-export const formAdd = document.forms.add;
-export const formProfile = document.forms.edit;
-export const popupWindow = document.querySelector(".popup_window");
-export const cardTemplate = document.querySelector("#card-template");
+

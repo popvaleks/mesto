@@ -51,9 +51,11 @@ export default class Card {
     this._setEventListeners();
 
     // Добавим данные
-    this._element.querySelector(".element__photo").src = this._link;
-    this._element.querySelector(".element__title").textContent = this._name;
-    this._element.querySelector(".element__photo").alt = this._name;
+    const elementPhoto = this._element.querySelector(".element__photo");
+    const elementTitle = this._element.querySelector(".element__title");
+    elementPhoto.src = this._link;
+    elementPhoto.alt = this._name;
+    elementTitle.textContent = this._name;
 
     // Вернём элемент наружу
     return this._element;
