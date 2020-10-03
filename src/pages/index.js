@@ -19,6 +19,8 @@ const popupCards = document.querySelector(".popup_cards");
 const buttonCards = document.querySelector(".profile__add-button-box");
 const popupWindow = document.querySelector(".popup_window");
 const cardTemplate = document.querySelector("#card-template");
+const formAdd = document.forms.add;
+const formProfile = document.forms.edit;
 
 // открытая карточка
 const popupImg = new PopupWithImage(popupWindow);
@@ -89,16 +91,29 @@ function formValidation() {
   });
 }
 
+function cleanErrorSpan(form) {
+  const deleteErrorSpan = new FormValidator({
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button-save',
+    inactiveButtonClass: 'popup__button-save_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible',
+    spanClass: '.popup__input-error'
+  }, form);
+  deleteErrorSpan.cleanError();
+}
+
 // кнопка ред профиль
 popupOpenButton.addEventListener("click", () => {
   popupEditProfile.open();
   openEditProfile();
-  formValidation(); // провести валидацию при открытии
+  cleanErrorSpan(formProfile);
 });
 
 //кнопка "+" (открыть попап добавления карточек)
 buttonCards.addEventListener("click", () => {
   popupAddCars.open();
-  formValidation();
+  cleanErrorSpan(formAdd);
 });
 
+formValidation(); // провести валидацию при открытии

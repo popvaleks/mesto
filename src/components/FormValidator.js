@@ -12,7 +12,7 @@ export default class FormValidator {
   }
 
   // сбрасывание ошибок валидации
-  _cleanError() {
+  cleanError() {
     this._formElement.querySelectorAll(this._spanClass).forEach((span) => {
       // удалить со спана модификатор ошибки
       span.classList.remove(this._errorClass);
@@ -23,7 +23,12 @@ export default class FormValidator {
       //удаляем с инпута модификтор ошибки
       input.classList.remove(this._inputErrorClass);
     });
+    // выставляем активацию кнопок
+    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+    this._toggleButtonState(inputList, buttonElement);
   }
+
 
   // добавление класса с ошибкой
   _showInputError(inputElement, errorElement, errorMessage) {
@@ -49,7 +54,6 @@ export default class FormValidator {
   // валидация input
   _checkInputValidity(inputElement) {
     // найти элемент у которого ошибка
-    // const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     if (!inputElement.validity.valid) {
       // если не валидно ошибку показать
@@ -102,7 +106,7 @@ export default class FormValidator {
     this._formElement.addEventListener("submit", (evt) => {
       evt.preventDefault(); // У каждой формы отменим стандартное поведение
     });
-    this._cleanError(); // сбрасывание ошибок валидации
+    //this._cleanError(); // сбрасывание ошибок валидации
     this._setEventListeners(); // Для каждой формы вызовем функцию setEventListeners, передав ей элемент формы
   }
 }
