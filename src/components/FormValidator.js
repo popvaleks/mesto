@@ -29,7 +29,6 @@ export default class FormValidator {
     this._toggleButtonState(inputList, buttonElement);
   }
 
-
   // добавление класса с ошибкой
   _showInputError(inputElement, errorElement, errorMessage) {
     // errorElement ищется и определяется в функции _checkInputValidity
@@ -106,7 +105,6 @@ export default class FormValidator {
     this._formElement.addEventListener("submit", (evt) => {
       evt.preventDefault(); // У каждой формы отменим стандартное поведение
     });
-    //this._cleanError(); // сбрасывание ошибок валидации
     this._setEventListeners(); // Для каждой формы вызовем функцию setEventListeners, передав ей элемент формы
   }
 }

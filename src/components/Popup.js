@@ -1,6 +1,5 @@
 import { escCode } from "../utils/constants.js";
 
-
 export default class Popup {
 
   constructor(popupSelector) {
@@ -34,7 +33,7 @@ export default class Popup {
   setEventListeners() {
     // слушатель закрытия по кресту
     this._popupSelector.querySelector(".popup__button-cross")
-      .addEventListener('click', this.close.bind(this));
+    .addEventListener('click', this.close.bind(this));
     // слушатель закрытия по фону
     this._popupSelector.addEventListener('click', this._handleOverlayClick.bind(this));
   }
