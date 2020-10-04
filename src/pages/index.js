@@ -72,48 +72,39 @@ function openEditProfile() {
   jobInput.value = profileInfo.info;
 }
 
-function formValidation() {
-  // создать массив из всех форм
-  const formList = Array.from(document.querySelectorAll(".popup__container"));
+// объект класса валидации формы профиля
+const formProfileValidation = new FormValidator({
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-save_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+  spanClass: '.popup__input-error'
+}, formProfile);
+// функция валидации для формы профиля
+formProfileValidation.enableValidation();
 
-  formList.forEach((form) => {
-
-    const formValidator = new FormValidator({
-      inputSelector: '.popup__input',
-      submitButtonSelector: '.popup__button-save',
-      inactiveButtonClass: 'popup__button-save_disabled',
-      inputErrorClass: 'popup__input_type_error',
-      errorClass: 'popup__error_visible',
-      spanClass: '.popup__input-error'
-    }, form);
-    // функция из класса отвечающая за добавление слушателей
-    formValidator.enableValidation();
-  });
-}
-
-function cleanErrorSpan(form) {
-  const deleteErrorSpan = new FormValidator({
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__button-save',
-    inactiveButtonClass: 'popup__button-save_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible',
-    spanClass: '.popup__input-error'
-  }, form);
-  deleteErrorSpan.cleanError();
-}
+// объект класса валидации формы добавления карточки
+const formAddValidation = new FormValidator({
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-save_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+  spanClass: '.popup__input-error'
+}, formAdd);
+// функция валидации для формы добавления карточки
+formAddValidation.enableValidation();
 
 // кнопка ред профиль
 popupOpenButton.addEventListener("click", () => {
   popupEditProfile.open();
   openEditProfile();
-  cleanErrorSpan(formProfile);
+  formProfileValidation.cleanError(); //сброс ошибок валидации
 });
 
 //кнопка "+" (открыть попап добавления карточек)
 buttonCards.addEventListener("click", () => {
   popupAddCars.open();
-  cleanErrorSpan(formAdd);
+  formAddValidation.cleanError(); //сброс ошибок валидации
 });
-
-formValidation(); // провести валидацию при открытии
