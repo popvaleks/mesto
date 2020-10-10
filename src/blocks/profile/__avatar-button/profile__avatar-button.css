@@ -30,3 +30,10 @@
 .profile__avatar-button:hover::before {
   opacity: 1;
 }
+
+@media screen and (max-width: 760px) {
+  .profile__avatar-button {
+    margin: 3.75px auto 3.75px;
+  }
+}
+

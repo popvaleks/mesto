@@ -8,7 +8,8 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import AvatarInfo from "../components/AvatarInfo.js";
-import PopupWithSubmit from "../components/PopupWithSubmit.js"
+import PopupWithSubmit from "../components/PopupWithSubmit.js";
+import Api from "../components/Api.js";
 
 const gridCards = document.querySelector(".elements");
 const popupProfile = document.querySelector(".popup_profile");
@@ -28,6 +29,15 @@ const popupAvatar = document.querySelector(".popup_avatar");
 const buttonAvatarEdit = document.querySelector(".profile__avatar-button");
 const avatarImg = document.querySelector(".profile__avatar");
 const popupConfirm = document.querySelector(".popup_confirm");
+
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-16',
+  headers: {
+    Authorization: 'dbdd480f-2b2c-4b97-8cc6-c05d1be34625',
+    'content-type': 'application/json'
+  }
+});
+api.getUsersCards();
 
 // открытая карточка
 const popupImg = new PopupWithImage(popupWindow);
