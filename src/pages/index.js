@@ -5,8 +5,9 @@ import { initialCards } from '../utils/cards.js';
 import FormValidator from "../components/FormValidator.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
-import PopupWithForm from "../components/PopupWithForm.js"
-import UserInfo from "../components/UserInfo.js"
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
+import AvatarInfo from "../components/AvatarInfo.js";
 
 const gridCards = document.querySelector(".elements");
 const popupProfile = document.querySelector(".popup_profile");
@@ -21,6 +22,10 @@ const popupWindow = document.querySelector(".popup_window");
 const cardTemplate = document.querySelector("#card-template");
 const formAdd = document.forms.add;
 const formProfile = document.forms.edit;
+const formAvatar = document.forms.avatar;
+const popupAvatar = document.querySelector(".popup_avatar");
+const buttonAvatarEdit = document.querySelector(".profile__avatar-button");
+const avatarImg = document.querySelector(".profile__avatar");
 
 // открытая карточка
 const popupImg = new PopupWithImage(popupWindow);
@@ -65,6 +70,16 @@ const popupAddCars = new PopupWithForm(
   createCard)
 popupAddCars.setEventListeners();
 
+const userAvatar = new AvatarInfo(avatarImg);
+// попап редактирования аватара
+const popupEditAvatar = new PopupWithForm(
+  popupAvatar,
+  (data) => {
+    userAvatar.setUserAvatar(data);
+  }
+)
+popupEditAvatar.setEventListeners();
+
 // заполнения попапа профиля
 function openEditProfile() {
   const profileInfo = userAbout.getUserInfo();
@@ -96,6 +111,18 @@ const formAddValidation = new FormValidator({
 // функция валидации для формы добавления карточки
 formAddValidation.enableValidation();
 
+// объект класса валидации формы аватара
+const formAvatarValidation = new FormValidator({
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-save_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+  spanClass: '.popup__input-error'
+}, formAvatar);
+// функция валидации для формы профиля
+formAvatarValidation.enableValidation();
+
 // кнопка ред профиль
 popupOpenButton.addEventListener("click", () => {
   popupEditProfile.open();
@@ -107,4 +134,10 @@ popupOpenButton.addEventListener("click", () => {
 buttonCards.addEventListener("click", () => {
   popupAddCars.open();
   formAddValidation.cleanError(); //сброс ошибок валидации
+});
+
+// кнопка редактировать аватар
+buttonAvatarEdit.addEventListener("click", () => {
+  popupEditAvatar.open();
+  formAvatarValidation.cleanError();
 });
