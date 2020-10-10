@@ -17,7 +17,8 @@
       <section class="profile" id="popup__profile">
 
         <button class="profile__avatar-button" name="button-avatar" type="button" aria-label="Изменить аватар">
-          <img src="https://pbs.twimg.com/profile_images/1031444517466120192/Xj_ioBV6.jpg" alt="Жак-Ив Кусто" class="profile__avatar">
+          <img src="https://pbs.twimg.com/profile_images/1031444517466120192/Xj_ioBV6.jpg" alt="Жак-Ив Кусто"
+            class="profile__avatar">
         </button>
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -78,10 +79,20 @@
     <div class="popup popup_avatar">
       <form class="popup__container" id="avatar" name="avatar" novalidate>
         <h3 class="popup__title popup__title_cards">Обновить аватар</h3>
-        <input type="url" name="link" value="" placeholder="Ссылка на новый аватар" class="popup__input popup__input_link"
-          required id="link-input" autocomplete="off">
+        <input type="url" name="link" value="" placeholder="Ссылка на новый аватар"
+          class="popup__input popup__input_link" required id="link-input" autocomplete="off">
         <span class="popup__input-error popup__input-error_avatar" id="link-input-error"></span>
-        <button class="button popup__button-save" type="submit" aria-label="Сохранить и закрыть попап">Сохранить</button>
+        <button class="button popup__button-save" type="submit"
+          aria-label="Сохранить и закрыть попап">Сохранить</button>
+        <button class="button popup__button-cross" aria-label="Закрыть попап" type="button"></button>
+      </form>
+    </div>
+    <!-- Попап подтверждения удаления -->
+    <div class="popup popup_confirm">
+      <form class="popup__container" id="confirm" name="confirm" novalidate>
+        <h3 class="popup__title popup__title_cards">Вы уверены?</h3>
+        <button class="button popup__button-save" type="submit"
+          aria-label="Сохранить и закрыть попап">Да</button>
         <button class="button popup__button-cross" aria-label="Закрыть попап" type="button"></button>
       </form>
     </div>

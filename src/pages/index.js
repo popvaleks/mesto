@@ -8,6 +8,7 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import AvatarInfo from "../components/AvatarInfo.js";
+import PopupWithSubmit from "../components/PopupWithSubmit.js"
 
 const gridCards = document.querySelector(".elements");
 const popupProfile = document.querySelector(".popup_profile");
@@ -26,6 +27,7 @@ const formAvatar = document.forms.avatar;
 const popupAvatar = document.querySelector(".popup_avatar");
 const buttonAvatarEdit = document.querySelector(".profile__avatar-button");
 const avatarImg = document.querySelector(".profile__avatar");
+const popupConfirm = document.querySelector(".popup_confirm");
 
 // открытая карточка
 const popupImg = new PopupWithImage(popupWindow);
@@ -71,6 +73,7 @@ const popupAddCars = new PopupWithForm(
 popupAddCars.setEventListeners();
 
 const userAvatar = new AvatarInfo(avatarImg);
+
 // попап редактирования аватара
 const popupEditAvatar = new PopupWithForm(
   popupAvatar,
@@ -79,6 +82,10 @@ const popupEditAvatar = new PopupWithForm(
   }
 )
 popupEditAvatar.setEventListeners();
+
+// попап подтверждения удаления
+const popupConfirmDelete = new PopupWithSubmit(popupConfirm);
+popupConfirmDelete.setEventListeners();
 
 // заполнения попапа профиля
 function openEditProfile() {
