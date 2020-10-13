@@ -40,4 +40,63 @@ export default class Api {
     }).then(this._checkError)
       .catch(this._errorCatch)
   }
+
+  addLike(id) {
+    return fetch(`${this._url}/cards/likes/${id}`, {
+      method: 'PUT',
+      headers: this._headers
+    }).then(this._checkError)
+      .catch(this._errorCatch)
+  }
+
+  deleteLike(id) {
+    return fetch(`${this._url}/cards/likes/${id}`, {
+      method: 'DELETE',
+      headers: this._headers
+    }).then(this._checkError)
+      .catch(this._errorCatch)
+  }
+
+  editUserInfo(userName, userAbout) {
+    return fetch(`${this._url}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: userName,
+        about: userAbout,
+      })
+    }).then(this._checkError)
+      .catch(this._errorCatch)
+  }
+
+  editUserAvatar(userAvatar) {
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: userAvatar
+      })
+    }).then(this._checkError)
+      .catch(this._errorCatch)
+  }
+
+  addMyCard(nameCard, linkCard) {
+    return fetch(`${this._url}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: nameCard,
+        link: linkCard
+      })
+    }).then(this._checkError)
+      .catch(this._errorCatch)
+  }
+
+  deleteCard(id) {
+    return fetch(`${this._url}/cards/${id}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    }).then(this._checkError)
+      .catch(this._errorCatch)
+  }
 }

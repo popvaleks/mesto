@@ -2,7 +2,7 @@ import Popup from "./Popup.js";
 
 export default class PopupWithSubmit extends Popup {
   constructor(popupSelector) {
-    super(popupSelector);
+    super(popupSelector)
   }
 
   setEventListeners() {
@@ -11,7 +11,14 @@ export default class PopupWithSubmit extends Popup {
     // слушатель сабмита
     this._popupSelector.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this.close();
+      if(this._confirm) {
+        this._confirm();
+        this.close();
+      }
     })
+  }
+
+  push(confirm) {
+    this._confirm = confirm;
   }
 }

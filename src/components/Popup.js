@@ -15,7 +15,6 @@ export default class Popup {
     this._popupSelector.classList.add("popup_opened");
     // слушатель закрытия по Esc
     document.addEventListener('keydown', this._handleEscClose);
-
   }
 
   close() {

@@ -4,15 +4,14 @@ export default class AvatarInfo {
     this._userAvatarSelector = userAvatarSelector;
   }
 
-  getUserInfo() {
+  getUserAvatar() {
     this.userData = {};
-    this.userData.name = this._userNameSelector.textContent;
-    this.userData.info = this._userInfoSelector.textContent;
+    this.userData.src = this._userAvatarSelector.textContent;
     return this.userData;
   }
 
-  setUserAvatar(url) {
-    this._userAvatarSelector.src = url.link;
+  setUserAvatar(data) {
+    this._userAvatarSelector.src = data.avatar;
   }
 
 }

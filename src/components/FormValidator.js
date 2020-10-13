@@ -9,7 +9,6 @@ export default class FormValidator {
     this._errorClass = setting.errorClass;
     this._spanClass = setting.spanClass;
     this._formElement = formElement;
-
   }
 
   // сбрасывание ошибок валидации
