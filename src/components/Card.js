@@ -88,5 +88,4 @@ export default class Card {
     // Вернём элемент наружу
     return this._element;
   };
-
 };

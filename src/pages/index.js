@@ -1,7 +1,6 @@
 import "../pages/index.css";
 
 import Card from '../components/Card.js';
-import { initialCards } from '../utils/cards.js';
 import FormValidator from "../components/FormValidator.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
@@ -10,7 +9,6 @@ import UserInfo from "../components/UserInfo.js";
 import AvatarInfo from "../components/AvatarInfo.js";
 import PopupWithSubmit from "../components/PopupWithSubmit.js";
 import Api from "../components/Api.js";
-import { data } from "autoprefixer";
 
 const gridCards = document.querySelector(".elements");
 const popupProfile = document.querySelector(".popup_profile");
@@ -30,7 +28,6 @@ const popupAvatar = document.querySelector(".popup_avatar");
 const buttonAvatarEdit = document.querySelector(".profile__avatar-button");
 const avatarImg = document.querySelector(".profile__avatar");
 const popupConfirm = document.querySelector(".popup_confirm");
-const buttonLike = document.querySelector(".element__button-like");
 
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-16',
@@ -40,76 +37,12 @@ const api = new Api({
   }
 });
 
-// // получаем массив с карточками с сервера
-// api.getUsersCards()
-//   .then((res) => {
-//     const userCards = new Section({
-//       items: res,
-//       renderer: (item) => {
-//         const compileCard = getCard(item, api);
-//         const elementCard = compileCard.generateCard();
-//         gridCards.append(elementCard);
-//       }
-//     }, gridCards)
-//     userCards.rendererItems();
-// });
-
-
-// // создаем карточку
-// function getCard(res, api) {
-//   const newCard = new Card(
-//     res.owner._id, // id пользователя
-//     res.likes,
-//     res.link,
-//     res.name,
-//     res._id, // id карточки
-//     //gridCards, //добавить
-//     api,
-
-//     {
-//       // реализуем функцию лайка
-//       likeCards: (evt) => {
-//         const like = evt.target; // подсчет лайков на карточке
-//         const currentLikes = like
-//           .closest(".element__like")
-//           .querySelector(".element__like-current");
-//         like.classList.toggle("element__button-like_enabled");
-//         // дописать функцию добавления лайков
-//       }
-//     },
-//     {
-//       handleCardClick: () => {
-//         popupImg.open({
-//           name: res.name,
-//           link: res.link
-//         })
-//         popupImg.setEventListeners();
-//       }
-//     },
-//     {
-//       handleTrashCards: () => {
-//         popupConfirmDelete.open();
-//         popupConfirmDelete.push((evt) => {
-//           evt.preventDefault();
-//           //дописать
-//         });
-//       }
-//     }
-//   )
-//   return newCard;
-// }
-
 // Promise.all ждет выполнения всех обещаний (или первого метода reject()).
 Promise.all([api.getUserInfo(), api.getUsersCards()])
   .then((res) => {
     // получаем значения своего профиля
     const [data, usersCards] = res;
     const reversed = usersCards.reverse()
-
-    // // установка данных о пользователе с сервера
-    // profileName.textContent = data.name;
-    // profileJob.textContent = data.about;
-    // avatarImg.src = data.avatar;
 
     // попап подтверждения удаления - вызывается в карточке
     const popupConfirmDelete = new PopupWithSubmit(popupConfirm);
@@ -122,7 +55,7 @@ Promise.all([api.getUserInfo(), api.getUsersCards()])
     }, gridCards);
     cardList.rendererItems();
 
-    // наложение на корточки слушателей и коллбеков
+    // наложение на карточки слушателей и коллбеков
     function createCard(item) {
       const card = new Card({
         data: item,
@@ -158,7 +91,6 @@ Promise.all([api.getUserInfo(), api.getUsersCards()])
       )
       cardList.addItem(card.generateCard());
     }
-
 
     // about
     const userAbout = new UserInfo(profileName, profileJob);
@@ -197,7 +129,7 @@ Promise.all([api.getUserInfo(), api.getUsersCards()])
       jobInput.value = profileInfo.about;
     }
 
-    // редактирование аватара
+    // загрузка аватара с сервера
     const userAvatar = new AvatarInfo(avatarImg);
     userAvatar.setUserAvatar(data);
 
@@ -256,66 +188,10 @@ Promise.all([api.getUserInfo(), api.getUsersCards()])
 const popupImg = new PopupWithImage(popupWindow);
 popupImg.setEventListeners();
 
-// // функция создания карточки
-// function createCard(data) {
-//   const card = new Card(
-//     data,
-//     cardTemplate,
-//     // слушатель открытой карточки
-//     () => {
-//       popupImg.open(data);
-//     }
-//   );
-//   cardList.addItem(card.generateCard());
-// }
-
-// // собрать "плитку" собраных ранее карточек
-// const cardList = new Section({
-//   items: initialCards,
-//   renderer: createCard
-// }, gridCards);
-
-// // отобразить "плитку"
-// cardList.rendererItems();
-
-// // about
-// const userAbout = new UserInfo(profileName, profileJob);
-
-// // попап редактировать профиль
-// const popupEditProfile = new PopupWithForm(
-//   popupProfile,
-//   (data) => {
-//     userAbout.setUserInfo(data);
-//   })
-// popupEditProfile.setEventListeners();
-
-// // попап добавления карточки
-// const popupAddCars = new PopupWithForm(
-//   popupCards,
-//   createCard)
-// popupAddCars.setEventListeners();
-
-// const userAvatar = new AvatarInfo(avatarImg);
-
-// // попап редактирования аватара
-// const popupEditAvatar = new PopupWithForm(
-//   popupAvatar,
-//   (data) => {
-//     userAvatar.setUserAvatar(data);
-//   }
-// )
-// popupEditAvatar.setEventListeners();
-
 // попап подтверждения удаления
 const popupConfirmDelete = new PopupWithSubmit(popupConfirm);
 popupConfirmDelete.setEventListeners();
 
-// // заполнения попапа профиля
-// function openEditProfile() {
-//   const profileInfo = userAbout.getUserInfo();
-//   nameInput.value = profileInfo.name;
-//   jobInput.value = profileInfo.info;
-// }
 
 // установа текста кнопки после выполнения then
 const textBTN = (popupSelector) => {
@@ -371,21 +247,3 @@ const formAvatarValidation = new FormValidator({
 // функция валидации для формы профиля
 formAvatarValidation.enableValidation();
 
-// // кнопка ред профиль
-// popupOpenButton.addEventListener("click", () => {
-//   popupEditProfile.open();
-//   openEditProfile();
-//   formProfileValidation.cleanError(); //сброс ошибок валидации
-// });
-
-// //кнопка "+" (открыть попап добавления карточек)
-// buttonCards.addEventListener("click", () => {
-//   popupAddCars.open();
-//   formAddValidation.cleanError(); //сброс ошибок валидации
-// });
-
-// // кнопка редактировать аватар
-// buttonAvatarEdit.addEventListener("click", () => {
-//   popupEditAvatar.open();
-//   formAvatarValidation.cleanError();
-// });

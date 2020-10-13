@@ -4,7 +4,6 @@ export default class Api {
     this._headers = config.headers;
   }
 
-  // избавимся от дублирования кода
   _checkError(res) {
     if (res.ok) {
       return res.json();
