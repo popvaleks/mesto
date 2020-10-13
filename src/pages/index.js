@@ -168,9 +168,16 @@ Promise.all([api.getUserInfo(), api.getUsersCards()])
     const popupEditProfile = new PopupWithForm(
       popupProfile, {
       formSubmit: (user) => {
+        activeLoadind(true, popupProfile);
         api.editUserInfo(user.name, user.about)
           .then(() => {
             userAbout.setUserInfo(user);
+          })
+          .then(() => {
+            popupEditProfile.close();
+          })
+          .finally(() => {
+            activeLoadind(false, popupProfile);
           })
       }
     })
@@ -198,9 +205,16 @@ Promise.all([api.getUserInfo(), api.getUsersCards()])
     const popupEditAvatar = new PopupWithForm(
       popupAvatar, {
       formSubmit: (user) => {
+        activeLoadind(true, popupAvatar);
         api.editUserAvatar(user.avatar)
           .then(() => {
             userAvatar.setUserAvatar(user);
+          })
+          .then(() => {
+            popupEditAvatar.close();
+          })
+          .finally(() => {
+            activeLoadind(false, popupAvatar);
           })
       }
     })
@@ -214,15 +228,19 @@ Promise.all([api.getUserInfo(), api.getUsersCards()])
 
     // попап добавления карточки
     const popupAddCards = new PopupWithForm(
-      popupCards,{
-        formSubmit: (data) => {
+      popupCards, {
+      formSubmit: (data) => {
+        activeLoadind(true, popupCards);
         api.addMyCard(data.name, data.link)
           .then((data) => {
             createCard(data)
           })
-          // .then(() => {
-          //   popupAddCards.close();
-          // })
+          .then(() => {
+            popupAddCards.close();
+          })
+          .finally(() => {
+            activeLoadind(false, popupCards);
+          })
       }
     })
     popupAddCards.setEventListeners();
@@ -298,6 +316,24 @@ popupConfirmDelete.setEventListeners();
 //   nameInput.value = profileInfo.name;
 //   jobInput.value = profileInfo.info;
 // }
+
+// установа текста кнопки после выполнения then
+const textBTN = (popupSelector) => {
+  if (popupSelector === popupCards) {
+    return 'Создать'
+  } else {
+    return 'Сохранить'}
+}
+
+// отображение загрузки
+const activeLoadind = (bool, popupSelector) => {
+  const currentSubmitBtn = popupSelector.querySelector('.popup__button-save');
+  if (bool) {
+    currentSubmitBtn.textContent = 'Сохранение...';
+  } else {
+    currentSubmitBtn.textContent = textBTN(popupSelector);
+  }
+}
 
 // объект класса валидации формы профиля
 const formProfileValidation = new FormValidator({
