@@ -37,6 +37,7 @@ export default class Card {
     this._element.parentNode.removeEventListener("click", this._handleLikeCard);
     this._element.parentNode.removeEventListener("click", this._handleCardClick);
     this._element.remove();
+    this._element = null;
   }
 
   _setEventListeners() {

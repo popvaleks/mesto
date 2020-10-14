@@ -13,7 +13,6 @@ export default class PopupWithSubmit extends Popup {
       evt.preventDefault();
       if(this._confirm) {
         this._confirm();
-        this.close();
       }
     })
   }

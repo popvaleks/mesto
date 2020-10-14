@@ -9,11 +9,7 @@ export default class Api {
       return res.json();
     }
 
-    return Promise.reject(res.status);
-  }
-
-  _errorCatch(err) {
-    console.log(`Ошибка ${err}!`)
+    return Promise.reject(new Error(`Ошибка: ${res.status}`));
   }
 
   getAllTasks() {
@@ -21,7 +17,6 @@ export default class Api {
       method: 'GET',
       headers: this._headers
     }).then(this._checkError)
-      .catch(this._errorCatch)
   }
 
   getUsersCards() {
@@ -29,7 +24,6 @@ export default class Api {
       method: 'GET',
       headers: this._headers
     }).then(this._checkError)
-      .catch(this._errorCatch)
   }
 
   getUserInfo() {
@@ -37,7 +31,6 @@ export default class Api {
       method: 'GET',
       headers: this._headers
     }).then(this._checkError)
-      .catch(this._errorCatch)
   }
 
   addLike(id) {
@@ -45,7 +38,6 @@ export default class Api {
       method: 'PUT',
       headers: this._headers
     }).then(this._checkError)
-      .catch(this._errorCatch)
   }
 
   deleteLike(id) {
@@ -53,7 +45,6 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     }).then(this._checkError)
-      .catch(this._errorCatch)
   }
 
   editUserInfo(userName, userAbout) {
@@ -65,7 +56,6 @@ export default class Api {
         about: userAbout,
       })
     }).then(this._checkError)
-      .catch(this._errorCatch)
   }
 
   editUserAvatar(userAvatar) {
@@ -76,7 +66,6 @@ export default class Api {
         avatar: userAvatar
       })
     }).then(this._checkError)
-      .catch(this._errorCatch)
   }
 
   addMyCard(nameCard, linkCard) {
@@ -88,7 +77,6 @@ export default class Api {
         link: linkCard
       })
     }).then(this._checkError)
-      .catch(this._errorCatch)
   }
 
   deleteCard(id) {
@@ -96,6 +84,5 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
     }).then(this._checkError)
-      .catch(this._errorCatch)
   }
 }

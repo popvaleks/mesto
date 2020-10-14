@@ -4,11 +4,7 @@ export default class Popup {
 
   constructor(popupSelector) {
     this._popupSelector = popupSelector;
-    this._handleEscClose = (evt) => {
-      if (evt.keyCode === escCode) {
-        this.close();
-      }
-    }
+    this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   open() {
@@ -21,6 +17,12 @@ export default class Popup {
     this._popupSelector.classList.remove("popup_opened");
     // слушатель закрытия по Esc
     document.removeEventListener('keydown', this._handleEscClose);
+  }
+
+  _handleEscClose(evt) {
+    if (evt.keyCode === escCode) {
+      this.close();
+    }
   }
 
   _handleOverlayClick(evt) {

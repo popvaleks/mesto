@@ -6,7 +6,6 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import AvatarInfo from "../components/AvatarInfo.js";
 import PopupWithSubmit from "../components/PopupWithSubmit.js";
 import Api from "../components/Api.js";
 
@@ -28,6 +27,14 @@ const popupAvatar = document.querySelector(".popup_avatar");
 const buttonAvatarEdit = document.querySelector(".profile__avatar-button");
 const avatarImg = document.querySelector(".profile__avatar");
 const popupConfirm = document.querySelector(".popup_confirm");
+const settingForm = {
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-save_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+  spanClass: '.popup__input-error'
+};
 
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-16',
@@ -71,6 +78,7 @@ Promise.all([api.getUserInfo(), api.getUsersCards()])
                 card.trashCards();
                 popupConfirmDelete.close();
               })
+              .catch((err) => {console.log(err)});
           })
         },
         handleLikeCard: () => {
@@ -78,13 +86,15 @@ Promise.all([api.getUserInfo(), api.getUsersCards()])
           if (!isLiked) {
             api.addLike(item._id)
               .then((item) => {
-                card.numberOfLikes(item.likes); //
-              });
+                card.numberOfLikes(item.likes);
+              })
+              .catch((err) => {console.log(err)});
           } else {
-            api.deleteLike(item._id) //
+            api.deleteLike(item._id)
               .then((item) => {
-                card.numberOfLikes(item.likes); //
-              });
+                card.numberOfLikes(item.likes);
+              })
+              .catch((err) => {console.log(err)});
           }
         },
       }, cardTemplate
@@ -93,8 +103,9 @@ Promise.all([api.getUserInfo(), api.getUsersCards()])
     }
 
     // about
-    const userAbout = new UserInfo(profileName, profileJob);
+    const userAbout = new UserInfo(profileName, profileJob, avatarImg);
     userAbout.setUserInfo(data);
+    userAbout.setUserAvatar(data);
 
     // попап редактировать профиль
     const popupEditProfile = new PopupWithForm(
@@ -108,6 +119,7 @@ Promise.all([api.getUserInfo(), api.getUsersCards()])
           .then(() => {
             popupEditProfile.close();
           })
+          .catch((err) => {console.log(err)})
           .finally(() => {
             activeLoadind(false, popupProfile);
           })
@@ -129,10 +141,6 @@ Promise.all([api.getUserInfo(), api.getUsersCards()])
       jobInput.value = profileInfo.about;
     }
 
-    // загрузка аватара с сервера
-    const userAvatar = new AvatarInfo(avatarImg);
-    userAvatar.setUserAvatar(data);
-
     // попап редактирования аватара
     const popupEditAvatar = new PopupWithForm(
       popupAvatar, {
@@ -140,11 +148,12 @@ Promise.all([api.getUserInfo(), api.getUsersCards()])
         activeLoadind(true, popupAvatar);
         api.editUserAvatar(user.avatar)
           .then(() => {
-            userAvatar.setUserAvatar(user);
+            userAbout.setUserAvatar(user);
           })
           .then(() => {
             popupEditAvatar.close();
           })
+          .catch((err) => {console.log(err)})
           .finally(() => {
             activeLoadind(false, popupAvatar);
           })
@@ -212,38 +221,17 @@ const activeLoadind = (bool, popupSelector) => {
 }
 
 // объект класса валидации формы профиля
-const formProfileValidation = new FormValidator({
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button-save',
-  inactiveButtonClass: 'popup__button-save_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
-  spanClass: '.popup__input-error'
-}, formProfile);
+const formProfileValidation = new FormValidator(settingForm, formProfile);
 // функция валидации для формы профиля
 formProfileValidation.enableValidation();
 
 // объект класса валидации формы добавления карточки
-const formAddValidation = new FormValidator({
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button-save',
-  inactiveButtonClass: 'popup__button-save_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
-  spanClass: '.popup__input-error'
-}, formAdd);
+const formAddValidation = new FormValidator(settingForm, formAdd);
 // функция валидации для формы добавления карточки
 formAddValidation.enableValidation();
 
 // объект класса валидации формы аватара
-const formAvatarValidation = new FormValidator({
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button-save',
-  inactiveButtonClass: 'popup__button-save_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible',
-  spanClass: '.popup__input-error'
-}, formAvatar);
+const formAvatarValidation = new FormValidator(settingForm, formAvatar);
 // функция валидации для формы профиля
 formAvatarValidation.enableValidation();
 
